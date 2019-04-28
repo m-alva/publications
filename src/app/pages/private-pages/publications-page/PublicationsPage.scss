@@ -1,0 +1,13 @@
+@import 'src/sass/colors';
+@import 'src/sass/metrics';
+
+.publication-page{
+    &__comments{
+        padding: $metrics-component-padding;
+        background: $colors-background-dark;
+    }
+    &__wrapper{
+        margin: 0 auto;
+        max-width: 48rem;
+    }
+}

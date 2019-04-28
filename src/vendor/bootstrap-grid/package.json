@@ -1,0 +1,28 @@
+{
+  "name": "bootstrap-grid",
+  "version": "1.0.0",
+  "description": "Extracted Bootstrap 3 Grid-System",
+  "main": "main.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scriptheroes/bootstrap-grid.git"
+  },
+  "keywords": [
+    "Bootstrap3",
+    "Grid",
+    "Grid-System",
+    "SCSS"
+  ],
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^1.0.1"
+  },
+  "author": "3rfan <eeb@massiveart.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scriptheroes/bootstrap-grid/issues"
+  }
+}

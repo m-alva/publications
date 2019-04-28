@@ -1,0 +1,17 @@
+@import 'src/sass/colors';
+@import 'src/sass/metrics';
+
+.header{
+    padding: $metrics-header-padding;
+    height: $metrics-header-height;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.16);
+    &__title{
+        font-weight: bold;    
+    }
+    &__greeting{
+        color: $font-default-color;    
+    }
+}

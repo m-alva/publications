@@ -1,0 +1,21 @@
+{
+  "name": "bootstrap-grid",
+  "version": "1.0.0",
+  "authors": [
+    "3rfan <eeb@massiveart.com>"
+  ],
+  "description": "Extracted Bootstrap 3 Grid-System",
+  "main": "main.scss",
+  "keywords": [
+    "Bootstrap3",
+    "Grid",
+    "Grid-System",
+    "SCSS"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}
