@@ -54,38 +54,38 @@ class RegisterPage extends React.Component {
         return (
             <div className="register-page">
                 <div className="register-page__login-form">
-                    <h2>Register</h2>
+                    <h2>Registrar</h2>
                     <form name="form" onSubmit={this.handleSubmit}>
                         <div className={'form-group form-group--border' + (submitted && !user.firstName ? ' has-error' : '')}>
-                            <TextInput placeholder="First Name" name="firstName" type="text" value={user.firstName} onChange={this.handleChange} />
+                            <TextInput placeholder="Primer nombre" name="firstName" type="text" value={user.firstName} onChange={this.handleChange} />
                             {submitted && !user.firstName &&
                                 <div className="help-block">First Name is required</div>
                             }
                         </div>
                         <div className={'form-group form-group--boder' + (submitted && !user.lastName ? ' has-error' : '')}>
-                            <TextInput placeholder="Last Name" name="lastName" type="text" value={user.lastName} onChange={this.handleChange} />
+                            <TextInput placeholder="Apellido" name="lastName" type="text" value={user.lastName} onChange={this.handleChange} />
                             {submitted && !user.lastName &&
                                 <div className="help-block">Last Name is required</div>
                             }
                         </div>
                         <div className={'form-group form-group--border' + (submitted && !user.username ? ' has-error' : '')}>
-                            <TextInput placeholder="Username" name="username" type="text" value={user.username} onChange={this.handleChange} />
+                            <TextInput placeholder="Usuario" name="username" type="text" value={user.username} onChange={this.handleChange} />
                             {submitted && !user.username &&
                                 <div className="help-block">Username is required</div>
                             }
                         </div>
                         <div className={'form-group form-group--border' + (submitted && !user.password ? ' has-error' : '')}>
-                            <TextInput placeholder="Password" name="password" type="password" value={user.password} onChange={this.handleChange} />
+                            <TextInput placeholder="Contraseña" name="password" type="password" value={user.password} onChange={this.handleChange} />
                             {submitted && !user.password &&
                                 <div className="help-block">Password is required</div>
                             }
                         </div>
                         <div className="form-group">
-                            <button className="form-group__button">Register</button>
+                            <button className="form-group__button">Registrar</button>
                             {registering && 
                                 <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt="loading" />
                             }
-                            <Link to="/login" className="btn btn-link">Cancel</Link>
+                            <Link to="/login" className="btn btn-link">Cancelar</Link>
                         </div>
                     </form>
                 </div>
