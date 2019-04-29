@@ -1,7 +1,7 @@
-export const commentsConstants = {
-    ADD: 'STATE_ADD',
-    UPDATE: 'STATE_UPDATE',
-    DELETE: 'STATE_DELETE',
+export const commentConstants = {
+    ADD: 'COMMENT_ADD',
+    UPDATE: 'COMMENT_UPDATE',
+    DELETE: 'COMMENT_DELETE',
     
     REACTION_LIKE: 'REACTION_LIKE',
     REACTION_LOVE: 'REACTION_LOVE',

@@ -1,19 +1,36 @@
-import { alertConstants } from '../constants/alert.constants';
+import { commentConstants } from '../constants/comment.constants';
+import { commentService } from '../services/comment.services';
 
 export const CommentActions = {
-    success,
-    error,
-    clear
+    add,
+    update,
+    remove,
+    getAll
 };
 
-function success(message) {
-    return { type: alertConstants.SUCCESS, message };
+function add(publication_id,comment) {
+    comment.publication_id = publication_id // force publication_id
+    return dispatch => {
+        commentService.add(comment).then(
+            comment => {
+                console.log("CommentActions",comment);
+                dispatch({ type: commentConstants.ADD, comment: comment })
+            },
+            error =>{
+
+            }
+        )
+    }
 }
 
-function error(message) {
-    return { type: alertConstants.ERROR, message };
+function update(comment) {
+
 }
 
-function clear() {
-    return { type: alertConstants.CLEAR };
+function remove(id){
+
+}
+
+function getAll(){
+
 }

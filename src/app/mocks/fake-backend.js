@@ -27,10 +27,17 @@ export function configureFakeBackend() {
             return comments.length ? Math.max(...comments.map(comment => comment.id)) + 1 : 1;
         }
 
-        if (url.endsWith('/comments') && opts.method === 'GET') {
-            // response with all publications on local storage
+        if (url.endsWith('/comments/add') && opts.method === 'POST') {
+            let newComment = JSON.parse(opts.body);
+
+            // store Comment
+            newComment.id = getOldId();
+            newComment.created_at = new Date();
+            comments.push(newComment);
+            localStorage.setItem('comments', JSON.stringify(comments));
+
             // respond 200 OK
-            resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(publications)) });
+            resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(newComment)) });
             return true;
         }
     }
@@ -42,12 +49,18 @@ export function configureFakeBackend() {
         function findUserRel(p){
             return users[users.findIndex(e => e.id === p.user_id)]
         }
+        function findCommentsRel(p) {
+            return comments.filter((c) => c.publication_id === p.id).map(c => Object.assign(c,{user: findUserRel(c)}));
+        }
 
         if (url.endsWith('/publications') && opts.method === 'GET') {
             // response with all publications on local storage
             // respond 200 OK
-            let publicationsResponse = publications.map(((v)=> {
-                return Object.assign({},v,{user: findUserRel(v)})
+            let publicationsResponse = publications.map(((p)=> {
+                return Object.assign({},p,{
+                    user: findUserRel(p),
+                    comments: findCommentsRel(p)
+                })
             }))
             resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(publicationsResponse)) });
             return true;
@@ -61,6 +74,7 @@ export function configureFakeBackend() {
             newPublication.id = getOldId();
             newPublication.created_at = new Date();
             newPublication.user = findUserRel(newPublication);
+            newPublication.comments = findCommentsRel(newPublication);
             publications.push(newPublication);
             localStorage.setItem('publications', JSON.stringify(publications));
 

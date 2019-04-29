@@ -28,14 +28,14 @@ function add(publication) {
     return fetch(`${config.apiUrl}/publications/add`, requestOptions).then(handleResponse);
 }
 
-function update(user) {
+function update(publication) {
     const requestOptions = {
         method: 'PUT',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
+        body: JSON.stringify(publication)
     };
 
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
+    return fetch(`${config.apiUrl}/publications/${publication.id}`, requestOptions).then(handleResponse);;
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -45,7 +45,7 @@ function _delete(id) {
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/publications/${id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
