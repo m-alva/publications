@@ -39,11 +39,17 @@ export function configureFakeBackend() {
         function getOldId(){
             return publications.length ? Math.max(...publications.map(publication => publication.id)) + 1 : 1;
         }
+        function findUserRel(p){
+            return users[users.findIndex(e => e.id === p.user_id)]
+        }
 
         if (url.endsWith('/publications') && opts.method === 'GET') {
             // response with all publications on local storage
             // respond 200 OK
-            resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(publications)) });
+            let publicationsResponse = publications.map(((v)=> {
+                return Object.assign({},v,{user: findUserRel(v)})
+            }))
+            resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(publicationsResponse)) });
             return true;
         }
 
@@ -54,6 +60,7 @@ export function configureFakeBackend() {
             // store publication
             newPublication.id = getOldId();
             newPublication.created_at = new Date();
+            newPublication.user = findUserRel(newPublication);
             publications.push(newPublication);
             localStorage.setItem('publications', JSON.stringify(publications));
 

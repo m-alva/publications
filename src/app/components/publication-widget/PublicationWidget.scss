@@ -1,0 +1,23 @@
+@import 'src/sass/colors';
+@import 'src/sass/metrics';
+
+.state-publisher{
+    background: $colors-background;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0.2rem;
+    &__input-area{
+        padding: $metrics-component-padding;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+        .MuiInput-underline:before{
+            content: none;
+        }
+    }
+    &__button-area{
+        padding: $metrics-component-padding;
+        display: flex;
+        justify-content: flex-end;
+    }
+    &__input-widget{
+        width: 100%;
+    }
+}
