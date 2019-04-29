@@ -1,18 +1,17 @@
 Requirements
-*node-sass
-*bower
+1) node-sass
+2) bower
 
 execute commands
-1)
-bower install
+1) bower install
 
-2)
-npm start
+2) npm start
 
 
+____________________________
 
-
-** Data Structure
+Data Structure
+--
 
 PublicationJson
 *îd
