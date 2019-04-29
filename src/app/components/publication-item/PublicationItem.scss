@@ -1,11 +1,13 @@
 @import 'src/sass/colors';
 @import 'src/sass/metrics';
+@import 'src/sass/mixins';
 
 .publication-item{
     background: $colors-background;
     margin: $metrics-component-margin 0;
     border-radius: 0.3rem;
     border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: $metrics-component-box-shadow;
     &__container{
         padding: $metrics-component-padding;
         &--content{
@@ -16,26 +18,56 @@
             }
         }
         &--details{
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid rgba(0,0,0,0.2);
         }
     }
+    &__user-name{
+        font-weight: bold;
+        color: $colors-primary;
+        margin: 0.3rem 0;
+    }
+    &__post-date{
+        font-size: 0.72rem;
+        margin: 0.2rem 0;
+        color: $colors-font-lighten;
+    }
+    &__message{
+        margin: 1rem 0;
+    }
+    &__actions > *{
+        margin-right: 2rem;
+    }
+    &__comment-number{
+        color: $colors-font-lighten;
+    }
     &__picture{
-        display: inline-block;
-        width: 3rem;
-        border-radius: 1.5rem;
-        background: $colors-background-dark;
-        overflow: hidden;
-        img{
-            width: 100%
-        }
+        @extend %circle-picture;
     }
     &__comments-wrapper{
         padding: $metrics-component-padding;
         background: $colors-background-dark;
     }
     &__comment-input{
+        margin-top: 0.8rem;
+        display: block;
         width: 100%;
+        height: 3.2rem;
+        padding: 0 2rem;
+        border: 1px solid transparent;
+        background: transparent;
+        max-height: 0;
+        transition: all 0.35s;
+        overflow: hidden;
+        border-radius: $metrics-component-border-1;
+        &.active{
+            max-height: 3.2rem;
+            border-color: rgba(0,0,0,0.1);
+            background: $colors-background;
+        }
     }
 }

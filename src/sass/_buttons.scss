@@ -1,0 +1,13 @@
+//
+// BUTTONS
+//
+button{
+    cursor: pointer;
+    color: $colors-primary;
+    &:focus{
+        outline:none;
+    }
+}
+.theme-btn{
+    padding: 0 1.5rem;
+}

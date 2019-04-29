@@ -4,7 +4,8 @@
 .state-publisher{
     background: $colors-background;
     border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 0.2rem;
+    border-radius: $metrics-component-border-1;
+    box-shadow: $metrics-component-box-shadow;
     &__input-area{
         padding: $metrics-component-padding;
         border-bottom: 1px solid rgba(0,0,0,0.2);

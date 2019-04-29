@@ -1,0 +1,31 @@
+@import 'src/sass/colors';
+@import 'src/sass/metrics';
+@import 'src/sass/mixins';
+
+.comment-item{
+    display: flex;
+    align-items: center;
+    &__left{
+        margin-right: 3rem;
+    }
+    &__description{
+        display: flex;
+    }
+    &__picture{
+        @extend %circle-picture;
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 1.1rem;
+        background: $colors-background;
+    }
+    &__title{
+        font-weight: bold;
+        color: $colors-primary;
+        margin-right: 0.8rem;
+    }
+    &__created-date{
+        font-size: 0.72rem;
+        color: $colors-font-lighten;
+        margin: 0.4rem 0;
+    }
+}

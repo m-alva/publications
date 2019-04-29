@@ -1,0 +1,14 @@
+%circle-picture{
+    display: inline-flex;
+    align-items: flex-end;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    background: $colors-background-dark;
+    overflow: hidden;
+    img{
+        margin: 0 auto;
+        display: block;
+        max-width: 88%;
+    }
+}

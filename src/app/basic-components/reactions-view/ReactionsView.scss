@@ -1,0 +1,29 @@
+.reactions-view{
+    height: 1.8rem;
+    &__image{
+        max-width: 1.6rem;
+        overflow: hidden;
+        &.show{
+            animation: reactionsZoomIn 0.6s forwards;
+        }
+        &.hidden{
+            animation: reactionsZoomOut 0.6s forwards;
+        }
+    }
+}
+@keyframes reactionsZoomIn{
+    0%{
+        max-width: 0;
+    }
+    100%{
+        max-width: 1.6rem;
+    }
+}
+@keyframes reactionsZoomOut{
+    0%{
+        max-width: 1.6rem;
+    }
+    100%{
+        max-width: 0;
+    }
+}

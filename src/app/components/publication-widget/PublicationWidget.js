@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import './PublicationWidget.scss';
+
 import { PublicationActions } from "../../actions/publication.actions";
 
-import './PublicationWidget.scss';
+import TextInput from "../../basic-components/text-input/TextInput";
 
 class PublicationWidget extends React.Component{
     constructor(props){
@@ -17,9 +19,10 @@ class PublicationWidget extends React.Component{
         this.updateMessage = this.updateMessage.bind(this);
     }
     updateMessage(e){
+        const { value } = e.target;
         e.preventDefault();
         this.setState({
-            message: e.target.value
+            message: value
         })
     }
     publish(e){
@@ -37,8 +40,7 @@ class PublicationWidget extends React.Component{
             <div className="state-publisher">
                 <div className="state-publisher__input-area">
                     <div className="state-publisher__input-widget">
-                        <label>Escribe aquí tu estado</label>
-                        <input value={message} onChange={this.updateMessage} />
+                        <TextInput placeholder="Escribe aquí tu estado" value={message} onChange={this.updateMessage} />
                     </div>
                 </div>
                 <div className="state-publisher__button-area">

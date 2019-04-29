@@ -68,12 +68,16 @@ export function configureFakeBackend() {
         function getOldId(){
             return comments.length ? Math.max(...comments.map(comment => comment.id)) + 1 : 1;
         }
+        function findUserRel(p){
+            return users[users.findIndex(e => e.id === p.user_id)]
+        }
 
         if (url.endsWith('/comments/add') && opts.method === 'POST') {
             let newComment = JSON.parse(opts.body);
 
             // store Comment
             newComment.id = getOldId();
+            newComment.user = findUserRel(newComment);
             newComment.created_at = new Date();
             comments.push(newComment);
             localStorage.setItem('comments', JSON.stringify(comments));

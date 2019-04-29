@@ -8,11 +8,10 @@ import { CommentActions } from "../../actions/comment.actions";
 import { PublicationActions } from '../../actions/publication.actions';
 
 import CommentItem from "../comment-item/CommentItem";
-import CommentForm from "../comment-form/CommentForm";
 import ReactionButton from "../../basic-components/reaction-button/ReactionButton";
+import ReactionsView from "../../basic-components/reactions-view/ReactionsView";
 
 
-import { publicationConstants } from '../../constants/publication.constants';
 
 class PublicationItem extends React.Component{
     constructor(props){
@@ -71,7 +70,7 @@ class PublicationItem extends React.Component{
     render(){
         const { showCommentForm } = this.state;
         const { publicationRef } = this.props;
-        const { comments } = publicationRef;
+        const { comments, reactions } = publicationRef;
         let renderComments = comments.map((v,k)=>
             <CommentItem key={k} commentRef={v}/>
         )
@@ -97,19 +96,14 @@ class PublicationItem extends React.Component{
                     </div>
                 </div>
                 <div className="publication-item__container publication-item__container--details">
-                    <div>social result</div>
-                    <div>{comments.length} comentarios</div>
+                    {<ReactionsView reactionsRef={reactions} />}
+                    <div className="publication-item__comment-number">{comments.length} comentarios</div>
                 </div>
-                {showCommentForm ? (
-                <div className="publication-item__container publication-item__container--comment-widget">
-                    <CommentForm/>
-                </div>
-                ) : null }
                 <div className="publication-item__comments-wrapper">
                     {comments.length ?(
                         renderComments
                     ) : null }
-                    <input className="publication-item__comment-input"
+                    <input className={"publication-item__comment-input " + (showCommentForm ? 'active' : 'inactive')}
                     placeholder="Escribe un comentario"
                     name="comment-message"
                     value={this.commentMessage}

@@ -1,0 +1,27 @@
+@import 'src/sass/colors';
+@import 'src/sass/metrics';
+
+.text-input{
+    display: inline-block;
+    position: relative;
+    margin-top: 0.8rem;
+    &__input{
+        line-height: 2rem;
+        height: 2rem;
+        width: 100%;
+    }
+    &__label{
+        pointer-events: none;
+        position: absolute;
+        color: $colors-primary;
+        font-weight: 600;
+        left: 0;
+        top: 0.6rem;
+        transition: all 0.4s;
+        transform-origin: left top;
+    }
+    &__input:focus + label {
+        top: -0.6rem;
+        transform: scale(0.78);
+    }
+}
