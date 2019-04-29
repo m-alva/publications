@@ -10,6 +10,7 @@ import { PublicationActions } from '../../actions/publication.actions';
 import CommentItem from "../comment-item/CommentItem";
 import ReactionButton from "../../basic-components/reaction-button/ReactionButton";
 import ReactionsView from "../../basic-components/reactions-view/ReactionsView";
+import { commentsFormat, formatDateToNow } from "../../helpers/format";
 
 
 
@@ -44,6 +45,9 @@ class PublicationItem extends React.Component{
             message: commentMessage
         }
         if(e.key === 'Enter'){
+            this.setState({
+                commentMessage: ''
+            })
             dispatch(CommentActions.add(publicationRef.id,comment))
         }
     }
@@ -68,7 +72,7 @@ class PublicationItem extends React.Component{
     }
 
     render(){
-        const { showCommentForm } = this.state;
+        const { showCommentForm, commentMessage } = this.state;
         const { publicationRef } = this.props;
         const { comments, reactions } = publicationRef;
         let renderComments = comments.map((v,k)=>
@@ -86,7 +90,7 @@ class PublicationItem extends React.Component{
                     <div className="publication-item__right">
                         <div className="publication-item__information">
                             <h4 className="publication-item__user-name">{publicationRef.user.firstName} {publicationRef.user.lastName}</h4>
-                            <h6 className="publication-item__post-date">{publicationRef.created_at}</h6>
+                            <blockquote className="publication-item__post-date">{formatDateToNow(publicationRef.created_at)}</blockquote>
                             <p className="publication-item__message">{publicationRef.message}</p>
                         </div>
                         <div className="publication-item__actions">
@@ -97,7 +101,7 @@ class PublicationItem extends React.Component{
                 </div>
                 <div className="publication-item__container publication-item__container--details">
                     {<ReactionsView reactionsRef={reactions} />}
-                    <div className="publication-item__comment-number">{comments.length} comentarios</div>
+                    <div className="publication-item__comment-number">{commentsFormat(comments.length)}</div>
                 </div>
                 <div className="publication-item__comments-wrapper">
                     {comments.length ?(
@@ -106,7 +110,7 @@ class PublicationItem extends React.Component{
                     <input className={"publication-item__comment-input " + (showCommentForm ? 'active' : 'inactive')}
                     placeholder="Escribe un comentario"
                     name="comment-message"
-                    value={this.commentMessage}
+                    value={commentMessage}
                     onKeyUp={this.handleCommentInputKeyUp}
                     onChange={this.handleCommentInputChange}
                     ></input>

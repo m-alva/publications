@@ -2,6 +2,8 @@ import React from 'react';
 import "./CommentItem.scss";
 import userIcon from "res/images/user.png"
 
+import { formatDateToNow } from "../../helpers/format";
+
 class CommentItem extends React.Component{
     // constructor(props){
     //     super(props);
@@ -21,9 +23,9 @@ class CommentItem extends React.Component{
                         <h4 className="comment-item__title">{user.firstName}</h4>
                         <p className="comment-item__message">{commentRef.message}</p>
                     </div>
-                    <div className="comment-item__created-date">
-                        {commentRef.created_at}
-                    </div>
+                    <blobquote className="comment-item__created-date">
+                        {formatDateToNow(commentRef.created_at)}
+                    </blobquote>
                 </div>
             </div>
         )

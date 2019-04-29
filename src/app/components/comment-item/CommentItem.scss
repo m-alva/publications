@@ -5,6 +5,7 @@
 .comment-item{
     display: flex;
     align-items: center;
+    margin: $metrics-component-margin 0;
     &__left{
         margin-right: 3rem;
     }

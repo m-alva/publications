@@ -8,10 +8,33 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(0,0,0,0.16);
+    &__content{
+        flex: 1 1 100%;
+        &--left{
+            text-align: left;
+        }
+        &--center{
+            text-align: center;
+        }
+        &--right{
+            text-align: right;
+        }
+    }
     &__title{
         font-weight: bold;    
     }
     &__greeting{
-        color: $colors-font-lighten;    
+        color: $colors-font-lighten;
+    }
+    &__hamburger-menu{
+        display: none;
+    }
+    @media screen and (max-width: 758px) {
+        &__hamburger-menu{
+            display: block;
+        }
+        &__greeting{
+            display: none;
+        }
     }
 }
