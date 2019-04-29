@@ -17,6 +17,7 @@ class PublicationWidget extends React.Component{
 
         this.publish = this.publish.bind(this);
         this.updateMessage = this.updateMessage.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
     }
     updateMessage(e){
         const { value } = e.target;
@@ -25,10 +26,18 @@ class PublicationWidget extends React.Component{
             message: value
         })
     }
+    handleKeyUp(e){
+        if(e.key === "Enter"){
+            this.publish(e);
+        }
+    }
     publish(e){
         const { dispatch, user } = this.props;
         const { message } = this.state;
         e.preventDefault();
+        this.setState({
+            message: ''
+        })
         dispatch(PublicationActions.add({
             user_id: user.id,
             message: message
@@ -40,7 +49,7 @@ class PublicationWidget extends React.Component{
             <div className="publication-widget">
                 <div className="publication-widget__input-area">
                     <div className="publication-widget__input-widget">
-                        <TextInput placeholder="Escribe aquí tu estado" value={message} onChange={this.updateMessage} />
+                        <TextInput placeholder="Escribe aquí tu estado" value={message} onChange={this.updateMessage} onKeyUp={this.handleKeyUp}/>
                     </div>
                 </div>
                 <div className="publication-widget__button-area">

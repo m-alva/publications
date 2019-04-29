@@ -28,15 +28,15 @@ export function configureFakeBackend() {
         function getOldId(){
             return reactions.length ? Math.max(...reactions.map(comment => comment.id)) + 1 : 1;
         }
-        function findUserReactionIndex(user_id){
-            return reactions.findIndex(v => v.user_id === user_id);
+        function findUserReactionIndex(user_id, publication_id){
+            return reactions.findIndex(v => ( v.user_id === user_id && v.publication_id === publication_id ));
         }
 
         if (url.endsWith('/reactions/add') && opts.method === 'POST') {
             let newReaction = JSON.parse(opts.body);
 
             // find if user has make reaction before
-            let oldReactionIndex = findUserReactionIndex(newReaction.user_id);
+            let oldReactionIndex = findUserReactionIndex(newReaction.user_id,newReaction.publication_id);
             if(oldReactionIndex !== -1){
                 if(newReaction.type !== reactions[oldReactionIndex].type){
                     // if reaction is not equal update type

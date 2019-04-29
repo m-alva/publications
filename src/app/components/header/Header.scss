@@ -26,13 +26,17 @@
     &__greeting{
         color: $colors-font-lighten;
     }
-    &__hamburger-menu{
-        display: none;
+    &__logout{
+        margin-left: 0.3rem;
+        color: $colors-font-lighten;
+        cursor: pointer;
+        &:hover{
+            color: $colors-font-default;
+        }
     }
     @media screen and (max-width: 758px) {
-        &__hamburger-menu{
-            display: block;
-        }
+        padding: $metrics-header-padding-mobile;
+        height: $metrics-header-height-mobile;
         &__greeting{
             display: none;
         }

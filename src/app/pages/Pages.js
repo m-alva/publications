@@ -6,45 +6,33 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { PrivateRoute } from './private-pages/PrivateRoute';
-import { history } from '../helpers/history';
 
 import LoginPage from "./login-page/LoginPage";
 import RegisterPage from "./register-page/RegisterPage";
 import PublicationsPage from "./private-pages/publications-page/PublicationsPage";
 
+import { setHistoryFromInternal } from "../helpers/history";
+
 class Pages extends React.Component  {
+  constructor(props){
+    super(props)
 
-  state = {
-    routeLocation : null,
-  }
-
-  constructor(props) {
-    super(props);
-
-    const { location } = this.props;
-    this.state = {
-      routeLocation: location
-    }
-    history.listen((location, action) => {
-      // clear alert on location change
-      this.setState({
-        routeLocation: location,
-      })
-    });
+    //set internal history browser to use programmatically
+    setHistoryFromInternal(this.props.history);
   }
   render(){
     console.log("render",this);
-    var { routeLocation } = this.state;
+    var { location } = this.props;
     return (
       <Wrapper>
         <TransitionGroup className="transition-group">
           <CSSTransition
-            key={routeLocation.key}
+            key={location.key}
             timeout={{ enter: 300, exit: 300 }}
             classNames="fade"
           >
             <section className="route-section">
-              <Switch location={routeLocation}>
+              <Switch location={location}>
                 <PrivateRoute exact path="/" component={PublicationsPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/register" component={RegisterPage} />

@@ -1,5 +1,6 @@
 @import 'src/sass/colors';
 @import 'src/sass/metrics';
+@import 'src/sass/mixins';
 
 .publication-widget{
     background: $colors-background;
@@ -22,12 +23,11 @@
         width: 100%;
     }
     &__button-widget{
-        background: $colors-secondary;
-        color: $colors-secondary-contrast;
-        border-radius: 0.2rem;
-        padding: 0 1.6rem;
-        height: 1.8rem;
-        line-height: 1.8rem;
-        font-size: 0.9rem;
+        @extend %button-widget;
+    }
+    @media screen and (max-width: 758px) {
+        &__button-area{
+            display: none;
+        }
     }
 }

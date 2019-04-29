@@ -12,3 +12,17 @@
         max-width: 88%;
     }
 }
+
+%button-widget{
+    background: $colors-secondary;
+    color: $colors-secondary-contrast;
+    border-radius: 0.2rem;
+    padding: 0 1.6rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    font-size: 0.9rem;
+    transition: all 0.4s;
+    &:hover{
+        background: darken($colors-secondary,10%);
+    }
+}

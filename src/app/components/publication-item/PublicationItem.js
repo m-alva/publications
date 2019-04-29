@@ -37,14 +37,14 @@ class PublicationItem extends React.Component{
     }
 
     handleCommentInputKeyUp(e){
-        const { dispatch, publicationRef } = this.props;
+        const { dispatch, publicationRef, user } = this.props;
         const { commentMessage } = this.state;
         let comment = {
-            user_id: publicationRef.user_id,
+            user_id: user.id,
             publication_id: publicationRef.id,
             message: commentMessage
         }
-        if(e.key === 'Enter'){
+        if(e.key === 'Enter') {
             this.setState({
                 commentMessage: ''
             })
@@ -53,11 +53,11 @@ class PublicationItem extends React.Component{
     }
 
     handleReactionClick(e){
-        const { dispatch, publicationRef } = this.props;
+        const { dispatch, publicationRef, user } = this.props;
         const { reactionEvent } = e;
         e.preventDefault();
         dispatch(PublicationActions.setReaction(publicationRef.id,{
-            user_id: publicationRef.user_id,
+            user_id: user.id,
             publication_id: publicationRef.id,
             type: reactionEvent
         }))
