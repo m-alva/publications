@@ -20,6 +20,7 @@
         transition: all 0.4s;
         transform-origin: left top;
     }
+    &__label--float,
     &__input:focus + label {
         top: -0.6rem;
         transform: scale(0.78);

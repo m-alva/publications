@@ -125,6 +125,7 @@ export function configureFakeBackend() {
             newPublication.created_at = new Date();
             newPublication.user = findUserRel(newPublication);
             newPublication.comments = findCommentsRel(newPublication);
+            newPublication.reactions = findReactionsRel(newPublication);
             publications.push(newPublication);
             localStorage.setItem('publications', JSON.stringify(publications));
 

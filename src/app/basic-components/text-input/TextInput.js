@@ -17,7 +17,7 @@ class TextInput extends React.Component{
         return(
             <div className="text-input">
                 <input className="text-input__input" value={value} onChange={this.handleOnChange} />
-                <label className="text-input__label">{placeholder}</label>
+                <label className={"text-input__label " + (value ? 'text-input__label--float' : '' ) }>{placeholder}</label>
             </div>
         )
     }

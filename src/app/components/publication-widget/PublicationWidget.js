@@ -37,15 +37,15 @@ class PublicationWidget extends React.Component{
     render(){
         const { message } = this.state;
         return (
-            <div className="state-publisher">
-                <div className="state-publisher__input-area">
-                    <div className="state-publisher__input-widget">
+            <div className="publication-widget">
+                <div className="publication-widget__input-area">
+                    <div className="publication-widget__input-widget">
                         <TextInput placeholder="Escribe aquí tu estado" value={message} onChange={this.updateMessage} />
                     </div>
                 </div>
-                <div className="state-publisher__button-area">
+                <div className="publication-widget__button-area">
                    <button variant="contained" 
-                   className="state-publisher__button-widget"
+                   className="publication-widget__button-widget"
                    onClick={this.publish}
                    >Publicar
                     </button>
