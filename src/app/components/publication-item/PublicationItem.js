@@ -2,11 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import "./PublicationItem.scss";
+import userIcon from "res/images/user.png"
 
 import { CommentActions } from "../../actions/comment.actions";
+import { PublicationActions } from '../../actions/publication.actions';
 
 import CommentItem from "../comment-item/CommentItem";
 import CommentForm from "../comment-form/CommentForm";
+import ReactionButton from "../../basic-components/reaction-button/ReactionButton";
+
+
+import { publicationConstants } from '../../constants/publication.constants';
 
 class PublicationItem extends React.Component{
     constructor(props){
@@ -44,7 +50,14 @@ class PublicationItem extends React.Component{
     }
 
     handleReactionClick(e){
+        const { dispatch, publicationRef } = this.props;
+        const { reactionEvent } = e;
         e.preventDefault();
+        dispatch(PublicationActions.setReaction(publicationRef.id,{
+            user_id: publicationRef.user_id,
+            publication_id: publicationRef.id,
+            type: reactionEvent
+        }))
     }
 
     handleCommentClick(e){
@@ -66,9 +79,9 @@ class PublicationItem extends React.Component{
         return (
             <article className="publication-item">
                 <div className="publication-item__container publication-item__container--content">
-                    <div className="publication-item__left">    
+                    <div className="publication-item__container--content__left">
                         <picture className="publication-item__picture">
-                            <source></source>
+                            <img src={userIcon} alt="User"/>
                         </picture>
                     </div>
                     <div className="publication-item__right">
@@ -78,7 +91,7 @@ class PublicationItem extends React.Component{
                             <p className="publication-item__message">{publicationRef.message}</p>
                         </div>
                         <div className="publication-item__actions">
-                            <button onClick={this.handleCommentClick}>Reaccionar</button>
+                            <ReactionButton onClick={this.handleReactionClick} label="Reaccionar" />
                             <button onClick={this.handleCommentClick}>Comentar</button>
                         </div>
                     </div>

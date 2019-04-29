@@ -30,6 +30,18 @@ export function publications(state = {
         })
       }
     //
+    // REACTIONS ACTIONS
+    //
+    case publicationConstants.REACTION_GETALL:
+      return {
+        publications: state.publications.map((publication) => {
+          return publication.id === action.publication_id ?
+          Object.assign({}, publication, {
+            reactions: action.reactions
+          }) : publication
+        })
+      }
+    //
     // COMMENTS ACTIONS
     //  
     case commentConstants.ADD:

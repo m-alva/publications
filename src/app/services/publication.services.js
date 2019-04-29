@@ -6,7 +6,7 @@ export const publicationService = {
     getAll,
     add,
     update,
-    delete: _delete
+    remove
 };
 
 function getAll(){
@@ -21,7 +21,7 @@ function getAll(){
 function add(publication) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(publication)
     };
 
@@ -38,8 +38,7 @@ function update(publication) {
     return fetch(`${config.apiUrl}/publications/${publication.id}`, requestOptions).then(handleResponse);;
 }
 
-// prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
+function remove(id) {
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader()

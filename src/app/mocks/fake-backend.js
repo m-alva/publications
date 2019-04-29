@@ -1,6 +1,7 @@
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
 let publications = JSON.parse(localStorage.getItem('publications')) || [];
+let reactions = JSON.parse(localStorage.getItem('reactions')) || [];
 let comments = JSON.parse(localStorage.getItem('comments')) || [];
     
 export function configureFakeBackend() {
@@ -13,7 +14,8 @@ export function configureFakeBackend() {
                 
                 if(!resolved) resolved = userMock(url,opts,resolve,reject);
                 if(!resolved) resolved = publicationMock(url,opts,resolve,reject);
-                if(!resolved) resolved = commentsMock(url,opts,resolve,reject);
+                if(!resolved) resolved = commentMock(url,opts,resolve,reject);
+                if(!resolved) resolved = reactionMock(url,opts,resolve,reject);
 
                 // pass through any requests not handled above
                 if(!resolved) realFetch(url, opts).then(response => resolve(response));
@@ -22,7 +24,47 @@ export function configureFakeBackend() {
         });
     }
 
-    function commentsMock(url,opts,resolve,reject){
+    function reactionMock(url,opts,resolve,reject){
+        function getOldId(){
+            return reactions.length ? Math.max(...reactions.map(comment => comment.id)) + 1 : 1;
+        }
+        function findUserReactionIndex(user_id){
+            return reactions.findIndex(v => v.user_id === user_id);
+        }
+
+        if (url.endsWith('/reactions/add') && opts.method === 'POST') {
+            let newReaction = JSON.parse(opts.body);
+
+            // find if user has make reaction before
+            let oldReactionIndex = findUserReactionIndex(newReaction.user_id);
+            if(oldReactionIndex !== -1){
+                if(newReaction.type !== reactions[oldReactionIndex].type){
+                    // if reaction is not equal update type
+                    newReaction.updated_at = new Date();
+                    reactions[oldReactionIndex] = Object.assign({},reactions[oldReactionIndex],newReaction);
+                    localStorage.setItem('reactions', JSON.stringify(reactions));
+                }else{
+                    // if reaction is equal then delete reaction
+                    reactions.splice(oldReactionIndex,1);
+                    localStorage.setItem('reactions', JSON.stringify(reactions));
+                }
+            }else{
+                // add reaction to store
+                newReaction.id = getOldId();
+                newReaction.created_at = new Date();
+                reactions.push(newReaction);
+                localStorage.setItem('reactions', JSON.stringify(reactions));
+            }
+
+            let filterReactions = reactions.filter(v => v.publication_id === newReaction.publication_id);
+
+            // respond 200 OK
+            resolve({ ok: true, text: () => Promise.resolve( JSON.stringify(filterReactions)) });
+            return true;
+        }
+    }
+
+    function commentMock(url,opts,resolve,reject){
         function getOldId(){
             return comments.length ? Math.max(...comments.map(comment => comment.id)) + 1 : 1;
         }
@@ -52,6 +94,9 @@ export function configureFakeBackend() {
         function findCommentsRel(p) {
             return comments.filter((c) => c.publication_id === p.id).map(c => Object.assign(c,{user: findUserRel(c)}));
         }
+        function findReactionsRel(p) {
+            return reactions.filter((c) => c.publication_id === p.id).map(r => Object.assign(r,{user: findUserRel(r)}));
+        }
 
         if (url.endsWith('/publications') && opts.method === 'GET') {
             // response with all publications on local storage
@@ -59,7 +104,8 @@ export function configureFakeBackend() {
             let publicationsResponse = publications.map(((p)=> {
                 return Object.assign({},p,{
                     user: findUserRel(p),
-                    comments: findCommentsRel(p)
+                    comments: findCommentsRel(p),
+                    reactions: findReactionsRel(p)
                 })
             }))
             resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(publicationsResponse)) });
