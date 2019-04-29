@@ -21,7 +21,6 @@ class Pages extends React.Component  {
     setHistoryFromInternal(this.props.history);
   }
   render(){
-    console.log("render",this);
     var { location } = this.props;
     return (
       <Wrapper>
@@ -77,7 +76,7 @@ const Wrapper = styled.div`
 `;
 
 function mapStateToProps(state) {
-    const { alert, location } = state;
+    const { alert } = state;
     return {
         alert
     };

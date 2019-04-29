@@ -78,7 +78,6 @@ class PublicationItem extends React.Component{
         let renderComments = comments.map((v,k)=>
             <CommentItem key={k} commentRef={v}/>
         )
-        console.log("comments",renderComments);
         return (
             <article className="publication-item">
                 <div className="publication-item__container publication-item__container--content">

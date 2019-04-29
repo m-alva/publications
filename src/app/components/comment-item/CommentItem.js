@@ -23,9 +23,9 @@ class CommentItem extends React.Component{
                         <h4 className="comment-item__title">{user.firstName}</h4>
                         <p className="comment-item__message">{commentRef.message}</p>
                     </div>
-                    <blobquote className="comment-item__created-date">
+                    <blockquote className="comment-item__created-date">
                         {formatDateToNow(commentRef.created_at)}
-                    </blobquote>
+                    </blockquote>
                 </div>
             </div>
         )
